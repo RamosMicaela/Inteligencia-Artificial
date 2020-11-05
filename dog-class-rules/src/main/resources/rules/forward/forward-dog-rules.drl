@@ -1,0 +1,132 @@
+package forwardDogRules
+
+import model.DiagnosticoFinalPerro;
+import model.DiagnosticoPreliminarPerro;
+import model.EstadoAnimico;
+import model.EstadoFisico;
+import model.EstadoGeneral;
+import model.Sexo;
+import model.Perro;
+
+
+rule "Perro sin enfermedad"
+    when
+    	$perro: Perro(
+        	estadoAnimico.presentaApatiaYTristesa == false, 
+        	estadoAnimico.presentaPerdidaDeApetito == false,
+        	estadoFisico.presentaDebilidad == false,
+        	estadoFisico.presentaDeshidratacion == false,
+        	estadoFisico.presentaOjosHundidos == false,
+        	estadoFisico.presentaMucosasPalidas == false,
+        	estadoFisico.presentaDolorEnPezones == false,
+        	estadoFisico.presentaFiebre == false,
+        	estadoFisico.presentaAumentoDelRitmoCardiaco == false,
+        	estadoFisico.presentaAdelgazamiento == false,
+        	estadoFisico.presentaObstruccionIntestinal == false,
+        	estadoFisico.presentaAscitis == false,
+        	estadoFisico.presentaDolorArticular == false,
+        	estadoFisico.presentaRigidezYLimitacionEnMovimientos == false,
+        	estadoFisico.presentaInflamacionEnArticulaciones == false,
+        	estadoFisico.presentaCrujidosEnArticulaciones == false,
+        	estadoGeneral.presentaHecesConSangre == false,
+        	estadoGeneral.presentaVomitos == false,
+        	estadoGeneral.presentaDiarrea == false,
+        	estadoGeneral.presentaHecesBlandas == false,
+        	estadoGeneral.presentaTos == false,
+        	estadoGeneral.presentaDesmayos == false,
+        	estadoGeneral.presentaHemorragiasNasales == false,
+        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        )
+    then
+    	modify($perro) {
+    	   diagnosticoFinalPerro.diagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.SinEnfermedad);
+    	}
+
+end
+
+/*
+rule "Perro con Parvovirus"
+    when
+    	$automovil: Automovil(
+    		motor.arranque.isa(Arranque.NoGira),
+    		bateria.tieneCarga == false,
+    		diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
+    	)
+    	
+    then
+    	modify($automovil) {
+    		diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.CargarBateria);
+    	}
+    	
+end
+
+
+rule "Perro con Mastitis"
+    when
+    	$automovil: Automovil(
+    		motor.arranque.isa(Arranque.Gira),
+    		tanque.tieneCombustible == false,
+    		diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
+    	)
+    then
+    	modify($automovil) {
+    	 	diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.CargarCombustible);
+    	}
+end
+
+rule "Perro con Parásitos intestinales"
+    when
+    	$automovil: Automovil(
+    		diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.RevisarMotor), // esta condicion hace de parametro de control
+    		diagnostico.diagnosticoMotor.isa(DiagnosticoMotor.NoDeterminado),
+    		motor.fuerzaMotor.isa(FuerzaMotor.Debil)
+    	)
+    	
+    then
+        // Si no necesitamos propagar modificaciones sacamos la clausula modify o el metodo update y evitamos loops infinitos en la misma regla
+        // Sin modify/update no hace falta poner el valor por default en el antecedente, pero es recomendable para evitar loops futuros. 
+    	$automovil.diagnostico.setDiagnosticoMotor(DiagnosticoMotor.LimpiarTuberiasCombustible);
+end
+
+rule "Perro con gusano del corazon"
+    //include attributes such as "salience" here...
+  when
+        $automovil: Automovil( 
+        	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.RevisarMotor),
+        	diagnostico.diagnosticoMotor.isa(DiagnosticoMotor.NoDeterminado),
+        	motor.presentaExplosiones == true 
+        )
+   then
+   		$automovil.diagnostico.setDiagnosticoMotor(DiagnosticoMotor.AjustarPuntosDeInyeccion);
+    	
+end
+
+rule "Perro con Artritis y Artrosis"
+   when
+        $automovil: Automovil( 
+        diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.RevisarMotor),
+        diagnostico.diagnosticoMotor.isa(DiagnosticoMotor.NoDeterminado),
+        motor.presentaGolpes == true
+        )
+ 
+    then
+    	$automovil.diagnostico.setDiagnosticoMotor(DiagnosticoMotor.AjustarTimingMotor);
+end
+
+rule "Diagnostico preliminar completado sin detectar enfermedad"
+    when
+    	$automovil: Automovil(
+    		motor.arranque.isa(Arranque.Gira),
+         	motor.observaFuncNormal == false,
+            tanque.tieneCombustible == true,
+         	bateria.tieneCarga == true ,
+         	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
+         )
+    then
+    	modify($automovil) {
+    		diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.RevisarMotor);
+    	}
+    	
+end
+
+*/
