@@ -34,6 +34,8 @@ public class ForwardTestCasesPerro {
 	@BeforeClass
 	public static void beforeallTestSetup() {
 		kieContainer = KnowledgeSessionHelper.createRuleBase();
+		print("----------Forward Rules Tests----------");
+		print();
 	}
 
 	private void prepareKnowledgeSession() {

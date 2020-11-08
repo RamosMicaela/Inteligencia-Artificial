@@ -36,6 +36,8 @@ public class BackwardTestCases {
 	@BeforeClass
 	public static void beforeallTestSetup() {
 		kieContainer = KnowledgeSessionHelper.createRuleBase();
+		print("----------Backward Rules Tests----------");
+		print();
 	}
 
 	private void prepareKnowledgeSession() {
