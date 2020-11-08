@@ -1,18 +1,14 @@
-package forwardDogRules
+package backwardDogRules
 
-import model.DiagnosticoFinalPerro;
-import model.DiagnosticoPreliminarPerro;
+import model.Perro
+import model.Sexo;
+import model.EstadoGeneral;
 import model.EstadoAnimico;
 import model.EstadoFisico;
-import model.EstadoGeneral;
-import model.Sexo;
-import model.Perro;
 
-
-rule "Perro sin enfermedad"
-    when
-    	$perro: Perro (
-        	estadoAnimico.presentaApatiaYTristeza == false, 
+query "Hipotesis: Perro sin enfermedad"
+	 exists $perro: Perro (
+    		estadoAnimico.presentaApatiaYTristeza == false, 
         	estadoAnimico.presentaPerdidaDeApetito == false,
         	estadoFisico.presentaDebilidad == false,
         	estadoFisico.presentaDeshidratacion == false,
@@ -34,19 +30,13 @@ rule "Perro sin enfermedad"
         	estadoGeneral.presentaHecesBlandas == false,
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
-        	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == false
         )
-    then
-    	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.SinEnfermedad);
-    	}
 end
 
-rule "Perro con Parvovirus"
-    when
-    	$perro: Perro (
-        	estadoAnimico.presentaApatiaYTristeza == true, 
+query "Hipotesis: Perro con Parvovirus"
+	 exists $perro: Perro (
+    		estadoAnimico.presentaApatiaYTristeza == true, 
         	estadoAnimico.presentaPerdidaDeApetito == true,
         	estadoFisico.presentaDebilidad == true,
         	estadoFisico.presentaDeshidratacion == true,
@@ -67,19 +57,12 @@ rule "Perro con Parvovirus"
         	estadoGeneral.presentaHecesBlandas == false,
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
-        	estadoGeneral.presentaHemorragiasNasales == false,
-    		diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == false
     	)
-    	
-    then
-    	modify ($perro) {
-    		diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.Parvovirus);
-    	}
 end
 
-rule "Perro con Mastitis"
-    when
-    	$perro: Perro (
+query "Hipotesis: Perro con Mastitis"
+    exists	$perro: Perro (
     		sexo.isa(Sexo.Hembra),
         	estadoAnimico.presentaApatiaYTristeza == true, 
         	estadoAnimico.presentaPerdidaDeApetito == true,
@@ -103,20 +86,13 @@ rule "Perro con Mastitis"
         	estadoGeneral.presentaHecesBlandas == false,
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
-        	estadoGeneral.presentaHemorragiasNasales == false,
-    		diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == false
     	)
-    	
-    then
-    	modify ($perro) {
-    		diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.Mastitis);
-    	}	
 end
 
-rule "Perro con parásitos intestinales"
-    when
-    	$perro: Perro (
-        	estadoAnimico.presentaApatiaYTristeza == false, 
+query "Hipotesis: Perro con Parasitos Intestinales"
+	 exists $perro: Perro (
+    		estadoAnimico.presentaApatiaYTristeza == false, 
         	estadoAnimico.presentaPerdidaDeApetito == true,
         	estadoFisico.presentaDebilidad == false,
         	estadoFisico.presentaDeshidratacion == false,
@@ -138,19 +114,13 @@ rule "Perro con parásitos intestinales"
         	estadoGeneral.presentaHecesBlandas == true,
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
-        	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == false
         )
-    then
-    	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.ParasitosIntestinales);
-    	}
 end
 
-rule "Perro con Gusanos del corazón"
-    when
-    	$perro: Perro (
-        	estadoAnimico.presentaApatiaYTristeza == false, 
+query "Hipotesis: Perro con Gusanos del Corazon"
+	 exists $perro: Perro (
+			estadoAnimico.presentaApatiaYTristeza == false, 
         	estadoAnimico.presentaPerdidaDeApetito == true,
         	estadoFisico.presentaDebilidad == false,
         	estadoFisico.presentaDeshidratacion == false,
@@ -172,19 +142,13 @@ rule "Perro con Gusanos del corazón"
         	estadoGeneral.presentaHecesBlandas == false,
         	estadoGeneral.presentaTos == true,
         	estadoGeneral.presentaDesmayos == true,
-        	estadoGeneral.presentaHemorragiasNasales == true,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == true
         )
-    then
-    	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.GusanoDelCorazon);
-    	}
 end
 
-rule "Perro con Artritis y Atrosis"
-    when
-    	$perro: Perro (
-        	estadoAnimico.presentaApatiaYTristeza == false, 
+query "Hipotesis: Perro con Artritis y Atrosis"
+	 exists $perro: Perro (
+			estadoAnimico.presentaApatiaYTristeza == false, 
         	estadoAnimico.presentaPerdidaDeApetito == false,
         	estadoFisico.presentaDebilidad == false,
         	estadoFisico.presentaDeshidratacion == false,
@@ -206,11 +170,7 @@ rule "Perro con Artritis y Atrosis"
         	estadoGeneral.presentaHecesBlandas == false,
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
-        	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	estadoGeneral.presentaHemorragiasNasales == false
         )
-    then
-    	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.ArtritisYAtrosis);
-    	}
 end
+

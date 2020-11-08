@@ -1,4 +1,4 @@
-package forward;
+package backward;
 
 import static utils.TestCaseUtilsPerro.assertResults;
 import static utils.TestCaseUtilsPerro.print;
@@ -18,28 +18,31 @@ import model.EstadoFisico;
 import model.EstadoGeneral;
 import model.Perro;
 import model.Sexo;
+import reasoner.BackwardChainingReasoner;
 import utils.KnowledgeSessionHelper;
 
-public class ForwardTestCasesPerro {
-	String K_SESSION_NAME = "kforward-chaining-session";
+public class BackwardTestCases {
 
-	KieSession sessionStatefull;
+	String K_SESSION_NAME = "kbackward-chaining-session";
+
+	BackwardChainingReasoner reasoner;
 	static KieContainer kieContainer;
 
-	FactHandle perroDir;
-
-	public ForwardTestCasesPerro() {
+	FactHandle automovilDir;
+	
+	public BackwardTestCases() {
 	}
-
+		
 	@BeforeClass
 	public static void beforeallTestSetup() {
 		kieContainer = KnowledgeSessionHelper.createRuleBase();
 	}
 
 	private void prepareKnowledgeSession() {
-		sessionStatefull = KnowledgeSessionHelper.getStatefulKnowledgeSessionWithCallback(kieContainer, K_SESSION_NAME);
+		KieSession sessionStatefull = KnowledgeSessionHelper.getStatefulKnowledgeSession(kieContainer, K_SESSION_NAME);
+		reasoner = new BackwardChainingReasoner(sessionStatefull);
 	}
-
+	
 	@Before
 	public void setUp() {
 		print("----------Start----------");
@@ -52,35 +55,33 @@ public class ForwardTestCasesPerro {
 		print();
 		print("----------End----------");
 		print();
-		this.sessionStatefull.dispose();
 	}
-
+	
 	@Test
 	public void perroSinEnfermedadTest() {
 		print("Caso de prueba: Perro sin enfermedad");
-
+		
 		EstadoAnimico estadoAnimico = new EstadoAnimico();
 		EstadoGeneral estadoGeneral = new EstadoGeneral();
 		EstadoFisico estadoFisico = new EstadoFisico();
 
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
-
+		
 		print(perro);
-
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
-
+		
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		
 		String valorEsperado = DiagnosticoPreliminarPerro.SinEnfermedad.toString();
-
-		assertResults(diagnostico, valorEsperado);
+		
+		assertResults(diagnostico,valorEsperado);
 	}
-
+	
 	@Test
 	public void perroConParvovirusTest() {
 		print("Caso de prueba: Perro con Parvovirus");
-
+		
 		EstadoAnimico estadoAnimico = new EstadoAnimico();
 		estadoAnimico.setPresentaApatiaYTristeza(true);
 		estadoAnimico.setPresentaPerdidaDeApetito(true);
@@ -95,24 +96,23 @@ public class ForwardTestCasesPerro {
 		estadoFisico.setpresentaDeshidratacion(true);
 		estadoFisico.setPresentaOjosHundidos(true);
 		estadoFisico.setPresentaMucosasPalidas(true);
-		
+
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
-
+		
 		print(perro);
-
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
-
+		
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		
 		String valorEsperado = DiagnosticoPreliminarPerro.Parvovirus.toString();
-
-		assertResults(diagnostico, valorEsperado);
+		
+		assertResults(diagnostico,valorEsperado);
 	}
 	
 	@Test
 	public void perroConMastitisTest() {
-		print("Caso de prueba: Perro con Mastiis");
+		print("Caso de prueba: Perro con Mastitis");
 		
 		EstadoAnimico estadoAnimico = new EstadoAnimico();
 		estadoAnimico.setPresentaApatiaYTristeza(true);
@@ -129,16 +129,16 @@ public class ForwardTestCasesPerro {
 
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
 		perro.setSexo(Sexo.Hembra);
+		
 		print(perro);
-
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
-
+		
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		
 		String valorEsperado = DiagnosticoPreliminarPerro.Mastitis.toString();
-
-		assertResults(diagnostico, valorEsperado);
+		
+		assertResults(diagnostico,valorEsperado);
 	}
 	
 	@Test
@@ -160,10 +160,9 @@ public class ForwardTestCasesPerro {
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
 		print(perro);
 
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
 
 		String valorEsperado = DiagnosticoPreliminarPerro.ParasitosIntestinales.toString();
 
@@ -190,10 +189,9 @@ public class ForwardTestCasesPerro {
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
 		print(perro);
 
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
 
 		String valorEsperado = DiagnosticoPreliminarPerro.GusanoDelCorazon.toString();
 
@@ -218,10 +216,9 @@ public class ForwardTestCasesPerro {
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
 		print(perro);
 
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
 
 		String valorEsperado = DiagnosticoPreliminarPerro.ArtritisYAtrosis.toString();
 
@@ -249,11 +246,10 @@ public class ForwardTestCasesPerro {
 		Perro perro = new Perro(estadoGeneral, estadoFisico, estadoAnimico);
 		print(perro);
 
-		sessionStatefull.insert(perro);
-		sessionStatefull.fireAllRules();
-
-		DiagnosticoFinalPerro diagnostico = perro.getDiagnosticoFinalPerro();
-
+		reasoner.insert(perro);
+		
+		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		
 		String valorEsperado = "Llevar a veterinario";
 
 		assertResults(diagnostico, valorEsperado);

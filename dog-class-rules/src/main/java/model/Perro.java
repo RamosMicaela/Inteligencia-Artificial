@@ -14,6 +14,7 @@ public class Perro {
 		this.estadoGeneral = estadoGeneral;
 		this.estadoFisico = estadoFisico;
 		this.estadoAnimico = estadoAnimico;
+		this.sexo = Sexo.Macho;
 		this.diagnosticoFinalPerro = new DiagnosticoFinalPerro();
 	}
 
