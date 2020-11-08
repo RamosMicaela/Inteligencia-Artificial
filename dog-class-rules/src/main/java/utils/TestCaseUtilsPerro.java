@@ -2,7 +2,7 @@ package utils;
 
 import model.Perro;
 import model.Sexo;
-import model.DiagnosticoFinalPerro;
+import model.Diagnostico;
 import model.EstadoFisico;
 import model.EstadoGeneral;
 import model.EstadoAnimico;
@@ -33,7 +33,7 @@ public class TestCaseUtilsPerro {
 		print();
 	}
 
-	public static void assertResults(DiagnosticoFinalPerro diagnostico, String valorEsperado) {
+	public static void assertResults(Diagnostico diagnostico, String valorEsperado) {
 		
 		String diagnosticoFinal = diagnostico.getDiagnosticoFinal();
 

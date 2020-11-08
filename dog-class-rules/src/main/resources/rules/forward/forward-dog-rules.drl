@@ -1,7 +1,7 @@
 package forwardDogRules
 
-import model.DiagnosticoFinalPerro;
-import model.DiagnosticoPreliminarPerro;
+import model.Diagnostico;
+import model.DiagnosticoPreliminar;
 import model.EstadoAnimico;
 import model.EstadoFisico;
 import model.EstadoGeneral;
@@ -35,11 +35,11 @@ rule "Perro sin enfermedad"
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
         	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
         )
     then
     	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.SinEnfermedad);
+    	   diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.SinEnfermedad);
     	}
 end
 
@@ -68,12 +68,12 @@ rule "Perro con Parvovirus"
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
         	estadoGeneral.presentaHemorragiasNasales == false,
-    		diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+    		diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
     	)
     	
     then
     	modify ($perro) {
-    		diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.Parvovirus);
+    		diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.Parvovirus);
     	}
 end
 
@@ -104,12 +104,12 @@ rule "Perro con Mastitis"
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
         	estadoGeneral.presentaHemorragiasNasales == false,
-    		diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+    		diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
     	)
     	
     then
     	modify ($perro) {
-    		diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.Mastitis);
+    		diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.Mastitis);
     	}	
 end
 
@@ -139,11 +139,11 @@ rule "Perro con parásitos intestinales"
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
         	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
         )
     then
     	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.ParasitosIntestinales);
+    	   diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.ParasitosIntestinales);
     	}
 end
 
@@ -173,11 +173,11 @@ rule "Perro con Gusanos del corazón"
         	estadoGeneral.presentaTos == true,
         	estadoGeneral.presentaDesmayos == true,
         	estadoGeneral.presentaHemorragiasNasales == true,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
         )
     then
     	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.GusanoDelCorazon);
+    	   diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.GusanoDelCorazon);
     	}
 end
 
@@ -207,10 +207,10 @@ rule "Perro con Artritis y Atrosis"
         	estadoGeneral.presentaTos == false,
         	estadoGeneral.presentaDesmayos == false,
         	estadoGeneral.presentaHemorragiasNasales == false,
-        	diagnosticoFinalPerro.diagnosticoPreliminarPerro.isa(DiagnosticoPreliminarPerro.NoDeterminado)
+        	diagnostico.diagnosticoPreliminar.isa(DiagnosticoPreliminar.NoDeterminado)
         )
     then
     	modify ($perro) {
-    	   diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro.ArtritisYAtrosis);
+    	   diagnostico.setDiagnosticoPreliminar(DiagnosticoPreliminar.ArtritisYAtrosis);
     	}
 end

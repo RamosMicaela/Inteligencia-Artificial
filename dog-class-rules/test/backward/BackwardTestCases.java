@@ -11,8 +11,8 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-import model.DiagnosticoFinalPerro;
-import model.DiagnosticoPreliminarPerro;
+import model.Diagnostico;
+import model.DiagnosticoPreliminar;
 import model.EstadoAnimico;
 import model.EstadoFisico;
 import model.EstadoGeneral;
@@ -73,9 +73,9 @@ public class BackwardTestCases {
 		
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 		
-		String valorEsperado = DiagnosticoPreliminarPerro.SinEnfermedad.toString();
+		String valorEsperado = DiagnosticoPreliminar.SinEnfermedad.toString();
 		
 		assertResults(diagnostico,valorEsperado);
 	}
@@ -105,9 +105,9 @@ public class BackwardTestCases {
 		
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 		
-		String valorEsperado = DiagnosticoPreliminarPerro.Parvovirus.toString();
+		String valorEsperado = DiagnosticoPreliminar.Parvovirus.toString();
 		
 		assertResults(diagnostico,valorEsperado);
 	}
@@ -136,9 +136,9 @@ public class BackwardTestCases {
 		
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 		
-		String valorEsperado = DiagnosticoPreliminarPerro.Mastitis.toString();
+		String valorEsperado = DiagnosticoPreliminar.Mastitis.toString();
 		
 		assertResults(diagnostico,valorEsperado);
 	}
@@ -164,9 +164,9 @@ public class BackwardTestCases {
 
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 
-		String valorEsperado = DiagnosticoPreliminarPerro.ParasitosIntestinales.toString();
+		String valorEsperado = DiagnosticoPreliminar.ParasitosIntestinales.toString();
 
 		assertResults(diagnostico, valorEsperado);
 	}
@@ -193,9 +193,9 @@ public class BackwardTestCases {
 
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 
-		String valorEsperado = DiagnosticoPreliminarPerro.GusanoDelCorazon.toString();
+		String valorEsperado = DiagnosticoPreliminar.GusanoDelCorazon.toString();
 
 		assertResults(diagnostico, valorEsperado);
 	}
@@ -220,9 +220,9 @@ public class BackwardTestCases {
 
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 
-		String valorEsperado = DiagnosticoPreliminarPerro.ArtritisYAtrosis.toString();
+		String valorEsperado = DiagnosticoPreliminar.ArtritisYAtrosis.toString();
 
 		assertResults(diagnostico, valorEsperado);
 	}
@@ -250,7 +250,7 @@ public class BackwardTestCases {
 
 		reasoner.insert(perro);
 		
-		DiagnosticoFinalPerro diagnostico = reasoner.fireDiagnosis();
+		Diagnostico diagnostico = reasoner.fireDiagnosis();
 		
 		String valorEsperado = "Llevar a veterinario";
 

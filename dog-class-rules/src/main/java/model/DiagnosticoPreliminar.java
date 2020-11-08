@@ -1,6 +1,6 @@
 package model;
 
-public enum DiagnosticoPreliminarPerro {
+public enum DiagnosticoPreliminar {
 	
 	SinEnfermedad,
 	NoDeterminado,
@@ -10,7 +10,7 @@ public enum DiagnosticoPreliminarPerro {
 	GusanoDelCorazon,
 	ArtritisYAtrosis;
 	
-	public Boolean isa(DiagnosticoPreliminarPerro diagnostico) {
+	public Boolean isa(DiagnosticoPreliminar diagnostico) {
 		
 		return this.toString() == diagnostico.toString();
 	}

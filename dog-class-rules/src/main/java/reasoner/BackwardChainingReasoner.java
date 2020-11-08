@@ -4,8 +4,8 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.api.runtime.rule.QueryResults;
 
-import model.DiagnosticoFinalPerro;
-import model.DiagnosticoPreliminarPerro;
+import model.Diagnostico;
+import model.DiagnosticoPreliminar;
 
 public class BackwardChainingReasoner {
 	KieSession sessionStatefull;
@@ -18,48 +18,48 @@ public class BackwardChainingReasoner {
 		return sessionStatefull.insert(obj);
 	}
 	
-	public DiagnosticoFinalPerro fireDiagnosis() {
-		DiagnosticoFinalPerro diagnostico = new DiagnosticoFinalPerro();
-		DiagnosticoPreliminarPerro diagnosticoPreliminar = this.diagnosticoPreliminarPerro();
-		diagnostico.setDiagnosticoPreliminarPerro(diagnosticoPreliminar);
+	public Diagnostico fireDiagnosis() {
+		Diagnostico diagnostico = new Diagnostico();
+		DiagnosticoPreliminar diagnosticoPreliminar = this.diagnosticoPreliminarPerro();
+		diagnostico.setDiagnosticoPreliminar(diagnosticoPreliminar);
 
 		return diagnostico;
 	}
 	
-	public DiagnosticoPreliminarPerro diagnosticoPreliminarPerro() {
+	public DiagnosticoPreliminar diagnosticoPreliminarPerro() {
 		
 		QueryResults result;
 		
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro sin enfermedad");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.SinEnfermedad;
+			return DiagnosticoPreliminar.SinEnfermedad;
 		}
 		
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro con Parvovirus");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.Parvovirus;
+			return DiagnosticoPreliminar.Parvovirus;
 		}
 		
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro con Mastitis");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.Mastitis;
+			return DiagnosticoPreliminar.Mastitis;
 		}
 		
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro con Parasitos Intestinales");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.ParasitosIntestinales;
+			return DiagnosticoPreliminar.ParasitosIntestinales;
 		}
 	
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro con Gusanos del Corazon");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.GusanoDelCorazon;
+			return DiagnosticoPreliminar.GusanoDelCorazon;
 		}
 		
 		result = sessionStatefull.getQueryResults("Hipotesis: Perro con Artritis y Atrosis");
 		if (result.size() >= 1) {
-			return DiagnosticoPreliminarPerro.ArtritisYAtrosis;
+			return DiagnosticoPreliminar.ArtritisYAtrosis;
 		}
 		
-		return DiagnosticoPreliminarPerro.NoDeterminado;
+		return DiagnosticoPreliminar.NoDeterminado;
 	}
 }

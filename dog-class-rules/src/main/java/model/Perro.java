@@ -6,7 +6,7 @@ public class Perro {
 	EstadoGeneral estadoGeneral;
 	EstadoFisico estadoFisico;
 	EstadoAnimico estadoAnimico;
-	public DiagnosticoFinalPerro diagnosticoFinalPerro;
+	public Diagnostico diagnostico;
 	
 	
 
@@ -15,16 +15,16 @@ public class Perro {
 		this.estadoFisico = estadoFisico;
 		this.estadoAnimico = estadoAnimico;
 		this.sexo = Sexo.Macho;
-		this.diagnosticoFinalPerro = new DiagnosticoFinalPerro();
+		this.diagnostico = new Diagnostico();
 	}
 
 
-	public void setDiagnosticoPreliminarPerro(DiagnosticoPreliminarPerro diagnostico) {
-		this.diagnosticoFinalPerro.setDiagnosticoPreliminarPerro(diagnostico);
+	public void setDiagnosticoPreliminarPerro(DiagnosticoPreliminar diagnostico) {
+		this.diagnostico.setDiagnosticoPreliminar(diagnostico);
 	}
 	
-	public void setDiagnosticoFinalPerro(DiagnosticoFinalPerro diagnostico) {
-		this.diagnosticoFinalPerro.setDiagnosticoFinalPerro(diagnostico);
+	public void setDiagnosticoFinalPerro(Diagnostico diagnostico) {
+		this.diagnostico.setDiagnosticoFinal(diagnostico);
 	}
 
 
@@ -67,7 +67,7 @@ public class Perro {
 		this.estadoAnimico = estadoAnimico;
 	}
 	
-	public DiagnosticoFinalPerro getDiagnosticoFinalPerro() {
-		return diagnosticoFinalPerro;
+	public Diagnostico getDiagnosticoFinal() {
+		return diagnostico;
 	}
 }
